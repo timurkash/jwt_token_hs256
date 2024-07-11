@@ -1,7 +1,5 @@
-// @ts-ignore
-import {replaceSpecialChars} from './utils.js'
-
 const algorithm = {name: "HMAC", hash: "SHA-256"}
+const replaceSpecialChars = (b64string: string) => b64string?.replaceAll('=', '').replaceAll('+', '-').replaceAll('/', '_')
 const headerString = replaceSpecialChars(window.btoa(JSON.stringify({alg: 'HS256', typ: 'JWT'})))
 const headerPayload = (payload: object): string => `${headerString}.${replaceSpecialChars(window.btoa(JSON.stringify(payload)))}`
 // @ts-ignore
